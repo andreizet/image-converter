@@ -1,0 +1,22 @@
+service: Open4TechApi
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  apiKeys:
+    - openfortech-api-key
+  role: arn:aws:iam::455192686905:role/lambda
+  region: us-east-1
+
+functions:
+  converter:
+    handler: handler.converter
+    events:
+      - http:
+          path: /
+          method: POST
+          cors: false
+plugins:
+  - serverless-offline

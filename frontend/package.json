@@ -1,11 +1,14 @@
 {
-  "name": "ImageConverter",
+  "name": "ImageResizer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy" : "npm run build && npm run uploadToS3 && npm run pushCode",
+    "uploadToS3" : "aws deploy push --application-name Open4Tech --s3-location s3://awr-code-deploy/Open4Tech.zip --ignore-hidden-files",
+    "pushCode": "aws deploy create-deployment --application-name Open4Tech --s3-location bucket=awr-code-deploy,key=Open4Tech.zip,bundleType=zip --deployment-group-name Open4Tech --description Open4Tech"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -44,3 +47,4 @@
     "not dead"
   ]
 }
+
